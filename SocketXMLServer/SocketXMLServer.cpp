@@ -11,7 +11,9 @@ struct client {
 	void operator() (Socket& sock) {
 		static std::mutex m;
 		std::unique_lock<std::mutex> lck(m);
-		std::cout << std::endl << "Come from client " << SOCKET(sock) << " :" << sock.recvStr(50) << std::endl;
+		std::cout << std::endl << "Come from client  " << SOCKET(sock) << " : " << sock.recvStr(50) << "." << std::endl;
+		std::cout << "Sending to client " << SOCKET(sock) << " : " << "Hello bro!" << "." << std::endl;
+		sock.sendStr("Hello bro!");
 	}
 };
 
