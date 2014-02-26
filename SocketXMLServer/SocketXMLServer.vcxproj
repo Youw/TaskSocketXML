@@ -116,9 +116,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Socket\ServerTCPIPv4.cpp" />
     <ClCompile Include="SocketXMLServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Socket\ServerTCPIPv4.hpp" />
     <ClInclude Include="..\Socket\Socket.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

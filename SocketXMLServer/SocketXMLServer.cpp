@@ -1,41 +1,29 @@
 
-#include <Socket/Socket.hpp>
+#include <Socket/ServerTCPIPv4.hpp>
 #include <iostream>
+
+using namespace sockets;
+
+#include <mutex>
+
+struct client {
+	
+	void operator() (Socket& sock) {
+		static std::mutex m;
+		std::unique_lock<std::mutex> lck(m);
+		std::cout << std::endl << "Come from client " << SOCKET(sock) << " :" << sock.recvStr(50) << std::endl;
+	}
+};
 
 int main(int argc, char* argv[])
 {
 	std::cout << "starts..." << std::endl;
 	InitSockets();
-	struct addrinfo *result = NULL;
-	struct addrinfo hints{ AI_PASSIVE, AF_INET, SOCK_STREAM, IPPROTO_TCP };
 	
-	Socket s;
+	SocketServerTCPIPv4 serv(client(), 2121);
 
-	int iResult = getaddrinfo(NULL, "2121", &hints, &result);
-	if (iResult != 0) {
-		return 0;
-	}
-
-	s.init(result->ai_family, result->ai_socktype, result->ai_protocol);
-	if (s.isInvalid()) {
-		return -1;
-	}
-	s.bind(result->ai_addr, (int)result->ai_addrlen);
-	if (s.isInvalid()) {
-		return -1;
-	}
-	s.listen();
-	if (s.isInvalid()) {
-		return -1;
-	}
-	freeaddrinfo(result);
-
-	Socket client = s.accept(nullptr, nullptr);
-	s.closesocket();
-	
-	std::cout << client.recvStr(100) << std::endl;
-	client.sendStr("Hello bro;");
 	system("pause");
+	ReleaseSockets();
 	return 0;
 }
 

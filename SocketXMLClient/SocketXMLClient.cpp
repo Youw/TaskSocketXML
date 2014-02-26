@@ -4,11 +4,11 @@
 
 int main(int argc, char* argv[])
 {
-	InitSockets();
+	sockets::InitSockets();
 	struct addrinfo *result = NULL;
 	struct addrinfo hints{ 0, AF_UNSPEC, SOCK_STREAM, IPPROTO_TCP };
 
-	Socket s;
+	sockets::Socket s;
 
 	int iResult = getaddrinfo("localhost", "2121", &hints, &result);
 	if (iResult != 0) {
@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
 	s.sendStr("Hello server;");
 	std::cout << s.recvStr(100) << std::endl;
 	system("pause");
+	sockets::ReleaseSockets();
 	return 0;
 }
 
