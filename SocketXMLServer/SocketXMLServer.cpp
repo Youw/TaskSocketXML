@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 	std::cout << "starts..." << std::endl;
 	InitSockets();
 	
-	SocketServerTCPIP serv(sockets::SockType::TCPIPv6, proc, client(), proc, 2121);
+	SocketServerTCPIP serv(sockets::SockType::TCPIPv4v6, proc, client(), proc, 2121);
 
 	system("pause");
 	ReleaseSockets();
