@@ -115,12 +115,17 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Socket\ServerTCPIPv4.cpp" />
+    <ClCompile Include="..\Socket\ServerTCPIP.cpp" />
     <ClCompile Include="SocketXMLServer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Socket\ServerTCPIPv4.hpp" />
+    <ClInclude Include="..\Socket\ServerTCPIP.hpp" />
     <ClInclude Include="..\Socket\Socket.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
